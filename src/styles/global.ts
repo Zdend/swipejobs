@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 import { COLORS, REM, BASE_UNIT } from '@/shared/theme';
 
 export const globalStyles = css`
-  @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,800&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,800&display=swap');
 
   html,
   body,
@@ -12,7 +12,7 @@ export const globalStyles = css`
 
   body {
     font-size: ${REM}px;
-    font-family: 'Raleway', -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue,
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue,
       Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol,
       noto color emoji;
   }
@@ -47,4 +47,17 @@ export const globalStyles = css`
       }
     `;
   })}
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin {
+    animation: spin 1.5s linear 0s infinite;
+  }
 `;
