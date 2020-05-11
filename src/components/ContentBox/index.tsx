@@ -3,7 +3,7 @@ import { BREAKPOINT } from '@/shared/theme';
 
 const ContentBox = styled.div`
   width: 100%;
-  max-width: ${BREAKPOINT.lg};
+  max-width: ${BREAKPOINT.sm};
   margin: 0 auto;
   display: flex;
   height: 100%;

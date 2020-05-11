@@ -1,7 +1,4 @@
-interface WorkerAddress {
-  zoneId: string;
-}
-
+import { Address } from './address';
 export interface WorkerProfile {
   workerId: string;
   firstName: string;
@@ -9,5 +6,5 @@ export interface WorkerProfile {
   email: string;
   phoneNumber: string;
   maxJobDistance: number;
-  address?: WorkerAddress;
+  address?: Address;
 }

@@ -3,10 +3,8 @@ import { useApiData } from '@/hooks/useApiData';
 import { fetchJobMatches } from '@/api/job';
 import DataState, { shouldRenderDataState } from '@/components/DataState';
 import JobDetail from '../JobDetail';
-import { job } from '@/fixtures/job';
 import PageStatus from '@/components/PageStatus';
 import { RiCheckDoubleLine } from 'react-icons/ri';
-
 interface JobFeedProps {
   workerId: string;
 }
@@ -16,11 +14,6 @@ const JobFeed = ({
 }: JobFeedProps) => {
   const [jobIndex, setJobIndex] = useState(0);
   const result = useApiData(fetchJobMatches, workerId);
-  // const result = {
-  //   loading: true,
-  //   error: null,
-  //   data: [job, job]
-  // }
   const nextJob = useCallback(() => {
     setJobIndex(jobIndex + 1);
   }, [ setJobIndex, jobIndex ]);

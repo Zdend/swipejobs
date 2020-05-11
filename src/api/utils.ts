@@ -13,7 +13,11 @@ export const fetchJson = async <T extends Record<string, any>>(
   config?: RequestInit
 ): Promise<T> => {
   const options = { ...DEFAULTS, config };
-
-  const response = await fetch(request, options);
-  return await response.json() as T;
+  return new Promise(async (resolve, reject) => {
+    const timeoutId = setTimeout(reject, 2000, { code: 'TIMED_OUT' });
+    const response = await fetch(request, options);
+    const json = await response.json() as T;
+    clearTimeout(timeoutId);
+    resolve(json);
+  });
 };

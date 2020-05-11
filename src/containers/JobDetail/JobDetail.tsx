@@ -18,6 +18,7 @@ import { RiCalendar2Line, RiToolsLine, RiMapPinLine, RiAccountCircleLine, RiLoad
 import { BtnColorType } from '@/shared/theme';
 import { fetchRejectJob, fetchAcceptJob } from '@/api/job';
 import useApiCallback from '@/hooks/useApiCallback';
+import { displayDate, displayTime } from '@/shared/date';
 
 interface JobDetailProps {
   workerId: string;
@@ -42,11 +43,11 @@ const JobDetail = ({
   
   const onRejectJob = useCallback(() => {
     rejectJob(() => nextJob());
-  }, [nextJob]);
+  }, [nextJob, rejectJob]);
 
   const onAcceptJob = useCallback(() => {
     acceptJob(() => nextJob());
-  }, [nextJob]);
+  }, [nextJob, acceptJob]);
 
   const loading = rejectLoading || acceptLoading;
   return (
@@ -62,7 +63,7 @@ const JobDetail = ({
       <JobDetailNumeration>
         <JobDetailNumerationPanel>
           <JobDetailNumerationLabel>Distance</JobDetailNumerationLabel>
-          <JobDetailNumerationValue>{job.milesToTravel} miles</JobDetailNumerationValue>
+          <JobDetailNumerationValue>{Number(job.milesToTravel).toFixed(2)} miles</JobDetailNumerationValue>
         </JobDetailNumerationPanel>
         <JobDetailNumerationPanel>
           <JobDetailNumerationLabel className="text-right">Hourly Rate</JobDetailNumerationLabel>
@@ -72,7 +73,7 @@ const JobDetail = ({
       <JobDetailInfoPanels>
         <JobDetailInfoPanel icon={<RiCalendar2Line size={ICON_SIZE} />} title="Shift Dates">
           {job.shifts.length ? job.shifts.map((shift, index) => (
-            <div key={index}>{shift}</div>
+            <div key={index} className="uppercase mt-1">{displayDate(shift.startDate)} - {displayTime(shift.endDate)}</div>
           )) : <div>To be determined.</div>}
         </JobDetailInfoPanel>
         <JobDetailInfoPanel icon={<RiMapPinLine size={ICON_SIZE} />} title="Location">
@@ -80,7 +81,11 @@ const JobDetail = ({
           <div>{job.milesToTravel} miles from your job search location</div>
         </JobDetailInfoPanel>
         <JobDetailInfoPanel icon={<RiToolsLine size={ICON_SIZE} />} title="Requirements">
-          {job.requirements}
+          {!job.requirements?.length 
+            ? <div>No special requirements.</div>
+            : <ul>
+              {job.requirements?.map((requirement, index) => <li key={index}> - {requirement}</li>)}
+            </ul>}
         </JobDetailInfoPanel>
         <JobDetailInfoPanel icon={<RiAccountCircleLine size={ICON_SIZE} />} title="Report To">
           {job.company.reportTo?.name} {job.company.reportTo?.phone}

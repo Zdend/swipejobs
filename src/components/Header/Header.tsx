@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { BASE_UNIT, SHADES } from '@/shared/theme';
+import { css } from '@emotion/core';
 
 const HeaderWrapper = styled.div`
   height: ${BASE_UNIT * 20}px;
@@ -11,9 +12,15 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `;
 
-const HeaderLogo = styled.img`
-  max-height: 50%;
+const headerLogoStyle = css`
+  display: inline-flex;
   max-width: 50%;
+  height: 100%;
+  align-items: center;
+`;
+
+const HeaderLogoImage = styled.img`
+  max-height: 50%;
 `;
 
 const HeaderExtension = styled.div`
@@ -32,7 +39,7 @@ interface HeaderProps {
 const Header = ({ children, ...rest }: HeaderProps) => {
   return (
     <HeaderWrapper {...rest}>
-      <HeaderLogo src="/images/logo.png" />
+      <a href="/" css={headerLogoStyle}><HeaderLogoImage src="/images/logo.png" /></a>
       <HeaderExtension>{children}</HeaderExtension>
     </HeaderWrapper>
   );

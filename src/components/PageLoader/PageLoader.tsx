@@ -12,7 +12,7 @@ const PageLoader = ({ children, ...rest }: PageLoaderProps) => {
   return <PageStatus
     {...rest}
     IconComponent={RiLoader4Line}
-    iconProps={{ className: 'spin primary--text', size: 50 }}
+    iconProps={{ className: 'spin primary--text' }}
   >{children || 'Loading...'}</PageStatus>;
 };
 

@@ -1,4 +1,4 @@
-const BASE_PATH = `https://test.swipejobs.com/api`;
+const BASE_PATH = `/api`;
 
 type PathWithParams = (...args: any[]) => { 
   path: string, 
@@ -16,7 +16,7 @@ export const workerJobMatches: PathWithParams = (workerId: string) => ({
 });
 
 export const workerJobAccept: PathWithParams = (workerId: string, jobId: string) => ({
-  path: `${BASE_PATH}/worker/${workerId}/job/${jobId}/matches`,
+  path: `${BASE_PATH}/worker/${workerId}/job/${jobId}/accept`,
   method: 'POST'
 });
 

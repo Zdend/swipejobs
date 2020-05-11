@@ -1,6 +1,4 @@
-export interface CompanyAddress {
-  formattedAddress: string;
-}
+import { Address } from './address';
 
 export interface CompanyManager {
   name: string;
@@ -9,7 +7,7 @@ export interface CompanyManager {
 
 export interface Company {
   name: string;
-  address: CompanyAddress;
+  address: Address;
   reportTo: CompanyManager;
 }
 
@@ -18,6 +16,10 @@ export interface JobTitle {
   imageUrl: string;
 }
 
+export interface JobShift {
+  startDate: string;
+  endDate: string;
+}
 export interface Job {
   jobId: string;
   jobTitle: JobTitle;
@@ -25,6 +27,6 @@ export interface Job {
   milesToTravel: number;
   wagePerHourInCents: number;
   branchPhoneNumber: string;
-  shifts: any[];
-  requirements: string;
+  shifts: JobShift[];
+  requirements: string[];
 }
