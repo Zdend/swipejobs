@@ -1,0 +1,5 @@
+generated/
+postcss.config.js
+*.generated.tsx
+node_modules/
+build/
