@@ -2,15 +2,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Header from '../Header';
 import ContentBox from '../ContentBox';
+import { COLORS } from '@/shared/theme';
 
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  background-color: ${COLORS.GREY[0]};
 `;
 
 interface BasicLayoutProps {
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
 }
 

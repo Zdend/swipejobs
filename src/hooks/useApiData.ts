@@ -7,9 +7,8 @@ export interface ApiResult<D> {
 }
 
 export const useApiData = <
-  R, 
-  F extends (...args: any[]) => Promise<R>,
->(fetchApi: F, ...fetchArgs: Parameters<F>): ApiResult<R> => {
+  F extends (...args: any[]) => Promise<any>,
+>(fetchApi: F, ...fetchArgs: Parameters<F>): ApiResult<Unwrap<ReturnType<F>>> => {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +26,8 @@ export const useApiData = <
       }
       setLoading(false);
     })();
-  }, [...fetchArgs]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchApi, ...fetchArgs]);
 
   return {
     loading,

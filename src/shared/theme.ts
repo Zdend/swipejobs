@@ -6,7 +6,7 @@ export const COLORS = {
   ERROR: generate('#F44336'),
   WARNING: generate('#FF9800'),
   INFO: generate('#2196F3'),
-  GREY: generate('#a5adb7'),
+  GREY: generate('#b4b5b7'),
   DARK: generate('#414141')
 };
 
