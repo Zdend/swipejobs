@@ -4,6 +4,8 @@ import { fetchJobMatches } from '@/api/job';
 import DataState, { shouldRenderDataState } from '@/components/DataState';
 import JobDetail from '../JobDetail';
 import { job } from '@/fixtures/job';
+import PageStatus from '@/components/PageStatus';
+import { RiCheckDoubleLine } from 'react-icons/ri';
 
 interface JobFeedProps {
   workerId: string;
@@ -13,12 +15,12 @@ const JobFeed = ({
   workerId
 }: JobFeedProps) => {
   const [jobIndex, setJobIndex] = useState(0);
-  // const result = useApiData(fetchJobMatches, workerId);
-  const result = {
-    loading: false,
-    error: null,
-    data: [job, job]
-  }
+  const result = useApiData(fetchJobMatches, workerId);
+  // const result = {
+  //   loading: true,
+  //   error: null,
+  //   data: [job, job]
+  // }
   const nextJob = useCallback(() => {
     setJobIndex(jobIndex + 1);
   }, [ setJobIndex, jobIndex ]);
@@ -29,6 +31,10 @@ const JobFeed = ({
 
   const { data } = result;
   const currentJob = data[jobIndex];
+
+  if (!currentJob) {
+    return <PageStatus IconComponent={RiCheckDoubleLine}>You have seen all positions, please come back later.</PageStatus>
+  }
 
   return (
     <JobDetail job={currentJob} nextJob={nextJob} workerId={workerId} />

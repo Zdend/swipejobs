@@ -1,11 +1,13 @@
 import React from 'react';
 import PageLoader from '../PageLoader';
-import GenericError from '../GenericError';
+import PageStatus from '../PageStatus';
+import { RiErrorWarningLine, RiStackLine } from 'react-icons/ri';
 
 interface DataStateProps {
   loading: boolean;
   error: any;
   data: any;
+  inline?: boolean;
 }
 
 const isLoading = (loading: DataStateProps['loading']): boolean => loading;
@@ -16,18 +18,28 @@ const DataState = ({
   loading,
   error,
   data,
+  inline,
 }: DataStateProps) => {
   if (isLoading(loading)) {
-    return <PageLoader className="my-4" inline data-testid="data-state__loader" />;
+    return <PageLoader data-testid="data-state__loader" inline={inline} />;
   }
   if (hasError(error)) {
-    return <GenericError className="my-4" data-testid="data-state__error" />;
+    return <PageStatus
+      data-testid="data-state__error"
+      IconComponent={RiErrorWarningLine}
+      iconProps={{ className: 'error--text' }}
+      inline={inline}
+    >Something went wrong..</PageStatus>;
   }
   if (hasNoData(data)) {
     return (
-      <h3 className="my-4" data-testid="data-state__no-data">
+      <PageStatus 
+        data-testid="data-state__no-data"
+        IconComponent={RiStackLine}
+        inline={inline}
+        >
         No data found.
-      </h3>
+      </PageStatus>
     );
   }
 };

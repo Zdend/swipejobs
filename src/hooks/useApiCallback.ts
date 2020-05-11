@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
 
 type Callback<D> = (
-  onResolve?: (response: D) => void, 
-  onError?: (error: any) => void
+  onDone?: (response?: D, error?: any) => void
 ) => void;
 
 export interface ApiResult<D> {
@@ -22,20 +21,20 @@ export const useApiCallback = <
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const callback = useCallback<Callback<D>>((onComplete, onError) => {
+  const callback = useCallback<Callback<D>>((onDone) => {
     (async () => {
       setLoading(true);
       try {
         const response = await fetchApi(...fetchArgs);
         setData(response);
         setError(null);
-        if (typeof onComplete === 'function') {
-          onComplete(response);
+        if (typeof onDone === 'function') {
+          onDone(response, null);
         }
       } catch (err) {
         setError(err);
-        if (typeof onError === 'function') {
-          onError(err);
+        if (typeof onDone === 'function') {
+          onDone(null, err);
         }
       }
       setLoading(false);
