@@ -20,13 +20,14 @@ export const useApiCallback = <
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const dependencies = [fetchApi, ...fetchArgs];
 
   useEffect(() => {
     setError(null);
     setData(null);
     setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchApi, ...fetchArgs]);
+  }, dependencies);
 
   const callback = useCallback<Callback<D>>(
     onDone => {
@@ -48,7 +49,7 @@ export const useApiCallback = <
       })();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [fetchApi, ...fetchArgs]
+    dependencies
   );
 
   return [
