@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 type Callback<D> = (
   onDone?: (response?: D, error?: any) => void
@@ -21,23 +21,29 @@ export const useApiCallback = <
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    setError(null);
+    setData(null);
+    setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchApi, ...fetchArgs]);
+
   const callback = useCallback<Callback<D>>((onDone) => {
+    let response = null;
+    let error = null;
     (async () => {
       setLoading(true);
       try {
-        const response = await fetchApi(...fetchArgs);
-        setData(response);
-        setError(null);
-        if (typeof onDone === 'function') {
-          onDone(response, null);
-        }
+        response = await fetchApi(...fetchArgs);
       } catch (err) {
-        setError(err);
-        if (typeof onDone === 'function') {
-          onDone(null, err);
-        }
+        error = err;
       }
+      setData(response);
+      setError(error);
       setLoading(false);
+      if (typeof onDone === 'function') {
+        onDone(response, error);
+      }
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchApi, ...fetchArgs]);

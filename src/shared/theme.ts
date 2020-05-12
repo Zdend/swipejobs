@@ -20,8 +20,13 @@ export const REM = BASE_UNIT * 4;
 export const BORDER_RADIUS_MEDIUM = BASE_UNIT;
 
 export enum BtnColorType {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary'
+  PRIMARY = 'PRIMARY',
+  SECONDARY = 'SECONDARY'
+}
+
+export enum NotificationColorType {
+  SUCCES = 'SUCCESS',
+  ERROR = 'ERROR'
 }
 
 export enum BREAKPOINT {

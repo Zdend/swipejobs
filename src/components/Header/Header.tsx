@@ -10,6 +10,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   padding: 0 1rem;
   width: 100%;
+  font-size: 1.25rem;
 `;
 
 const headerLogoStyle = css`

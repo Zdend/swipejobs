@@ -14,9 +14,7 @@ const JobFeed = ({
 }: JobFeedProps) => {
   const [jobIndex, setJobIndex] = useState(0);
   const result = useApiData(fetchJobMatches, workerId);
-  const nextJob = useCallback(() => {
-    setJobIndex(jobIndex + 1);
-  }, [ setJobIndex, jobIndex ]);
+  const nextJob = useCallback(() => setJobIndex(jobIndex => jobIndex + 1), []);
   
   if (shouldRenderDataState(result)) {
     return <DataState {...result} />;

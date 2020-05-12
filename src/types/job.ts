@@ -30,3 +30,13 @@ export interface Job {
   shifts: JobShift[];
   requirements: string[];
 }
+
+export enum ErrorCode {
+  FAIL_101 = 'FAIL-101'
+}
+
+export interface ActionResponse {
+  success: boolean;
+  message?: string;
+  errorCode?: ErrorCode
+}

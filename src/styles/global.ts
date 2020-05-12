@@ -35,11 +35,6 @@ export const globalStyles = css`
     line-height: 1.5;
   }
 
-  a {
-    color: ${COLORS.PRIMARY[5]};
-    text-decoration: underline;
-  }
-
   ${Object.entries(COLORS).map(([name, variants]) => {
     return `
       .${name.toLocaleLowerCase()}--text {
@@ -59,5 +54,9 @@ export const globalStyles = css`
 
   .spin {
     animation: spin 1.5s linear 0s infinite;
+  }
+
+  .caption {
+    font-size: 0.65rem;
   }
 `;
