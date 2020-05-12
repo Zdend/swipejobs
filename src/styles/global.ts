@@ -12,9 +12,8 @@ export const globalStyles = css`
 
   body {
     font-size: ${REM}px;
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue,
-      Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol,
-      noto color emoji;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial,
+      noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
   }
 
   h1 {

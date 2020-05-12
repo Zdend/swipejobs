@@ -1,12 +1,11 @@
-const BASE_PATH = `${
-  process.env.REACT_APP_PROXY_URL || ''
-}/${
-  process.env.REACT_APP_API_HOST || ''
-}/api`;
+const BASE_PATH = `${process.env.REACT_APP_PROXY_URL || ''}/${process.env.REACT_APP_API_HOST ||
+  ''}/api`;
 
-type PathWithParams = (...args: any[]) => { 
-  path: string, 
-  method: 'GET' | 'POST' | 'PUT'
+type PathWithParams = (
+  ...args: any[]
+) => {
+  path: string;
+  method: 'GET' | 'POST' | 'PUT';
 };
 
 export const workerProfile: PathWithParams = (workerId: string) => ({

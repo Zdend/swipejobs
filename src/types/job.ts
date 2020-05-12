@@ -38,5 +38,5 @@ export enum ErrorCode {
 export interface ActionResponse {
   success: boolean;
   message?: string;
-  errorCode?: ErrorCode
+  errorCode?: ErrorCode;
 }

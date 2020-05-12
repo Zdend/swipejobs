@@ -28,10 +28,7 @@ const NotificationWrapper = styled.div<NotificationProps>`
 `;
 
 const Notification = (props: NotificationProps) => {
-  return ReactDOM.createPortal(
-    <NotificationWrapper {...props} />,
-    modalRoot
-  );
+  return ReactDOM.createPortal(<NotificationWrapper {...props} />, modalRoot);
 };
 
 export default Notification;

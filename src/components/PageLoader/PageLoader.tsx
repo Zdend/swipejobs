@@ -1,6 +1,6 @@
 import React from 'react';
-import PageStatus from '../PageStatus';
 import { RiLoader4Line } from 'react-icons/ri';
+import PageStatus from '../PageStatus';
 
 interface PageLoaderProps {
   className?: string;
@@ -9,11 +9,15 @@ interface PageLoaderProps {
 }
 
 const PageLoader = ({ children, ...rest }: PageLoaderProps) => {
-  return <PageStatus
-    {...rest}
-    IconComponent={RiLoader4Line}
-    iconProps={{ className: 'spin primary--text' }}
-  >{children || 'Loading...'}</PageStatus>;
+  return (
+    <PageStatus
+      {...rest}
+      IconComponent={RiLoader4Line}
+      iconProps={{ className: 'spin primary--text' }}
+    >
+      {children || 'Loading...'}
+    </PageStatus>
+  );
 };
 
 export default PageLoader;

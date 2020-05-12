@@ -30,21 +30,13 @@ interface JobDetailInfoPanelProps {
   children: React.ReactNode;
 }
 
-const JobDetailInfoPanel = ({
-  icon,
-  title,
-  children,
-}: JobDetailInfoPanelProps) => {
+const JobDetailInfoPanel = ({ icon, title, children }: JobDetailInfoPanelProps) => {
   return (
     <JobDetailInfoPanelWrapper>
-      <JobDetailInfoPanelLeft>
-        {icon}
-      </JobDetailInfoPanelLeft>
+      <JobDetailInfoPanelLeft>{icon}</JobDetailInfoPanelLeft>
       <JobDetailInfoPanelRight>
         <JobDetailInfoPanelTitle>{title}</JobDetailInfoPanelTitle>
-        <JobDetailInfoPanelContent>
-          {children}
-        </JobDetailInfoPanelContent>
+        <JobDetailInfoPanelContent>{children}</JobDetailInfoPanelContent>
       </JobDetailInfoPanelRight>
     </JobDetailInfoPanelWrapper>
   );

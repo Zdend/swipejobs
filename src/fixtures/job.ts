@@ -2,7 +2,8 @@ export const job = {
   jobId: '123',
   jobTitle: {
     name: 'Construction General Helper',
-    imageUrl: 'https://www.hallpayne.com.au/imageGen.ashx?image=/media/1590/man-in-hangar-with-hard-hat-smaller.jpg',
+    imageUrl:
+      'https://www.hallpayne.com.au/imageGen.ashx?image=/media/1590/man-in-hangar-with-hard-hat-smaller.jpg'
   },
   company: {
     name: 'C.D. Barnes & Associates',
@@ -18,5 +19,5 @@ export const job = {
   milesToTravel: 5.6,
   requirements: 'Safety Vest, Hard Hat',
   wagePerHourInCents: 1350,
-  branchPhoneNumber: '12356780',
+  branchPhoneNumber: '12356780'
 };

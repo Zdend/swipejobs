@@ -1,4 +1,5 @@
 import { Address } from './address';
+
 export interface WorkerProfile {
   workerId: string;
   firstName: string;

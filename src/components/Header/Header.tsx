@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { BASE_UNIT, SHADES } from '@/shared/theme';
 import { css } from '@emotion/core';
+import { BASE_UNIT, SHADES } from '@/shared/theme';
 
 const HeaderWrapper = styled.div`
   height: ${BASE_UNIT * 20}px;
@@ -40,7 +40,9 @@ interface HeaderProps {
 const Header = ({ children, ...rest }: HeaderProps) => {
   return (
     <HeaderWrapper {...rest}>
-      <a href="/" css={headerLogoStyle}><HeaderLogoImage src="/images/logo.png" /></a>
+      <a href="/" css={headerLogoStyle}>
+        <HeaderLogoImage src="/images/logo.png" />
+      </a>
       <HeaderExtension>{children}</HeaderExtension>
     </HeaderWrapper>
   );

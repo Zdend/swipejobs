@@ -1,4 +1,12 @@
 import React, { useCallback } from 'react';
+import {
+  RiCalendar2Line,
+  RiToolsLine,
+  RiMapPinLine,
+  RiAccountCircleLine,
+  RiLoader4Line,
+  RiArrowRightSLine
+} from 'react-icons/ri';
 import { Job } from '@/types/job';
 import { useImage } from '@/hooks/useImage';
 import {
@@ -14,10 +22,9 @@ import {
 } from './JobDetail.styled';
 import JobDetailInfoPanel from './JobDetailInfoPanel';
 import Btn from '@/components/Btn';
-import { RiCalendar2Line, RiToolsLine, RiMapPinLine, RiAccountCircleLine, RiLoader4Line, RiArrowRightSLine } from 'react-icons/ri';
 import { BtnColorType, NotificationColorType } from '@/shared/theme';
 import { fetchRejectJob, fetchAcceptJob } from '@/api/job';
-import useApiCallback from '@/hooks/useApiCallback';
+import { useApiCallback } from '@/hooks/useApiCallback';
 import { displayDate, displayTime } from '@/shared/date';
 import Notification from '@/components/Notification';
 
@@ -29,29 +36,23 @@ interface JobDetailProps {
 
 const ICON_SIZE = 25;
 
-const JobDetail = ({
-  workerId,
-  job,
-  nextJob
-}: JobDetailProps) => {
+const JobDetail = ({ workerId, job, nextJob }: JobDetailProps) => {
   const [jobImageLoaded, jobImageUrl] = useImage(job.jobTitle.imageUrl);
-  const [rejectJob, {
-    loading: rejectLoading,
-    error: rejectError,
-    data: rejectData,
-  }] = useApiCallback(fetchRejectJob, workerId, job.jobId);
-  const [acceptJob, {
-    loading: acceptLoading,
-    error: acceptError,
-    data: acceptData
-  }] = useApiCallback(fetchAcceptJob, workerId, job.jobId);
+  const [
+    rejectJob,
+    { loading: rejectLoading, error: rejectError, data: rejectData }
+  ] = useApiCallback(fetchRejectJob, workerId, job.jobId);
+  const [
+    acceptJob,
+    { loading: acceptLoading, error: acceptError, data: acceptData }
+  ] = useApiCallback(fetchAcceptJob, workerId, job.jobId);
 
   const onRejectJob = useCallback(() => {
     rejectJob(() => nextJob());
   }, [nextJob, rejectJob]);
 
   const onAcceptJob = useCallback(() => {
-    acceptJob((response) => {
+    acceptJob(response => {
       if (response.success) {
         nextJob();
       }
@@ -59,10 +60,8 @@ const JobDetail = ({
   }, [nextJob, acceptJob]);
 
   const loading = rejectLoading || acceptLoading;
-  const error = rejectError 
-    || acceptError 
-    || rejectData?.success === false 
-    || acceptData?.success === false;
+  const error =
+    rejectError || acceptError || rejectData?.success === false || acceptData?.success === false;
   return (
     <JobDetailWrapper>
       <JobDetailBanner
@@ -76,18 +75,28 @@ const JobDetail = ({
       <JobDetailNumeration>
         <JobDetailNumerationPanel>
           <JobDetailNumerationLabel>Distance</JobDetailNumerationLabel>
-          <JobDetailNumerationValue>{Number(job.milesToTravel).toFixed(2)} miles</JobDetailNumerationValue>
+          <JobDetailNumerationValue>
+            {Number(job.milesToTravel).toFixed(2)} miles
+          </JobDetailNumerationValue>
         </JobDetailNumerationPanel>
         <JobDetailNumerationPanel>
           <JobDetailNumerationLabel className="text-right">Hourly Rate</JobDetailNumerationLabel>
-          <JobDetailNumerationValue className="text-right">${Number(job.wagePerHourInCents / 100).toFixed(2)}</JobDetailNumerationValue>
+          <JobDetailNumerationValue className="text-right">
+            ${Number(job.wagePerHourInCents / 100).toFixed(2)}
+          </JobDetailNumerationValue>
         </JobDetailNumerationPanel>
       </JobDetailNumeration>
       <JobDetailInfoPanels>
         <JobDetailInfoPanel icon={<RiCalendar2Line size={ICON_SIZE} />} title="Shift Dates">
-          {job.shifts.length ? job.shifts.map((shift, index) => (
-            <div key={index} className="uppercase mt-1">{displayDate(shift.startDate)} - {displayTime(shift.endDate)}</div>
-          )) : <div>To be determined.</div>}
+          {job.shifts.length ? (
+            job.shifts.map(shift => (
+              <div key={shift.startDate + shift.endDate} className="uppercase mt-1">
+                {displayDate(shift.startDate)} - {displayTime(shift.endDate)}
+              </div>
+            ))
+          ) : (
+            <div>To be determined.</div>
+          )}
         </JobDetailInfoPanel>
         <JobDetailInfoPanel icon={<RiMapPinLine size={ICON_SIZE} />} title="Location">
           <a
@@ -95,7 +104,8 @@ const JobDetail = ({
             href={`https://www.google.com.au/maps/place/${job.company.address?.formattedAddress}`}
             rel="noopener noreferrer"
             target="_blank"
-            title="Open Maps">
+            title="Open Maps"
+          >
             <div className="flex-grow">
               <div>{job.company.address?.formattedAddress}</div>
               <div className="caption">{job.milesToTravel} miles from your job search location</div>
@@ -106,11 +116,15 @@ const JobDetail = ({
           </a>
         </JobDetailInfoPanel>
         <JobDetailInfoPanel icon={<RiToolsLine size={ICON_SIZE} />} title="Requirements">
-          {!job.requirements?.length
-            ? <div>No special requirements.</div>
-            : <ul>
-              {job.requirements?.map((requirement, index) => <li key={index}> - {requirement}</li>)}
-            </ul>}
+          {!job.requirements?.length ? (
+            <div>No special requirements.</div>
+          ) : (
+            <ul>
+              {job.requirements?.map((requirement, index) => (
+                <li key={index}> - {requirement}</li>
+              ))}
+            </ul>
+          )}
         </JobDetailInfoPanel>
         <JobDetailInfoPanel icon={<RiAccountCircleLine size={ICON_SIZE} />} title="Report To">
           {job.company.reportTo?.name} {job.company.reportTo?.phone}
@@ -123,13 +137,15 @@ const JobDetail = ({
         </Btn>
         <Btn color={BtnColorType.PRIMARY} disabled={loading} onClick={onAcceptJob}>
           {acceptLoading && <RiLoader4Line className="spin mr-2" />}
-          I'll Take it
+          I&apos;ll Take it
         </Btn>
       </JobDetailActions>
-      {error && <Notification color={NotificationColorType.ERROR}>
-        {acceptData?.message || rejectData?.message || 'Something went wrong!'}
-      </Notification>}
-    </JobDetailWrapper >
+      {error && (
+        <Notification color={NotificationColorType.ERROR}>
+          {acceptData?.message || rejectData?.message || 'Something went wrong!'}
+        </Notification>
+      )}
+    </JobDetailWrapper>
   );
 };
 

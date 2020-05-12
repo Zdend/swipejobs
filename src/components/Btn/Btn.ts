@@ -1,5 +1,5 @@
-import { COLORS, BORDER_RADIUS_MEDIUM, SHADES, BtnColorType } from "@/shared/theme";
 import styled from '@emotion/styled';
+import { COLORS, BORDER_RADIUS_MEDIUM, SHADES, BtnColorType } from '@/shared/theme';
 
 interface BtnBaseProps {
   color: BtnColorType;

@@ -10,7 +10,7 @@ export const JobDetailWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const JobDetailBanner = styled.div<{ src: string, contain?: boolean }>`
+export const JobDetailBanner = styled.div<{ src: string; contain?: boolean }>`
   height: 250px;
   ${({ src, contain }) => `
   background: ${COLORS.GREY[2]} url(${src}) no-repeat center center;
@@ -62,7 +62,7 @@ export const JobDetailActions = styled.div`
   padding-bottom: 1rem;
   display: flex;
   & > :first-of-type {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
   & > * {
     flex: 1;

@@ -1,7 +1,7 @@
 import React from 'react';
-import ContentBox from '../ContentBox';
 import styled from '@emotion/styled';
 import { IconType, IconBaseProps } from 'react-icons';
+import ContentBox from '../ContentBox';
 
 const PageStatusWrapper = styled.div<{ inline?: boolean }>`
   display: flex;
@@ -21,21 +21,18 @@ interface PageStatusProps {
   inline?: boolean;
 }
 
-const PageStatus = ({
-  IconComponent,
-  iconProps,
-  children,
-  inline
-}: PageStatusProps) => {
-  const targetIconProps = { 
-    size: 100, 
+const PageStatus = ({ IconComponent, iconProps, children, inline }: PageStatusProps) => {
+  const targetIconProps = {
+    size: 100,
     className: 'primary--text',
-    ...iconProps,
+    ...iconProps
   };
   return (
     <ContentBox>
       <PageStatusWrapper inline={inline}>
-        <div><IconComponent {...targetIconProps} /></div>
+        <div>
+          <IconComponent {...targetIconProps} />
+        </div>
         <div>{children}</div>
       </PageStatusWrapper>
     </ContentBox>
