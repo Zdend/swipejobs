@@ -21,14 +21,14 @@ interface PageStatusProps {
   inline?: boolean;
 }
 
-const PageStatus = ({ IconComponent, iconProps, children, inline }: PageStatusProps) => {
+const PageStatus = ({ IconComponent, iconProps, children, inline, ...rest }: PageStatusProps) => {
   const targetIconProps = {
     size: 100,
     className: 'primary--text',
     ...iconProps
   };
   return (
-    <ContentBox>
+    <ContentBox {...rest}>
       <PageStatusWrapper inline={inline}>
         <div>
           <IconComponent {...targetIconProps} />

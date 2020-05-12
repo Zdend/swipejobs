@@ -20,8 +20,8 @@ const BasicLayout = ({ title, children, ...rest }: BasicLayoutProps) => {
   return (
     <PageWrapper {...rest}>
       <Header data-testid="basic-layout__header">{title}</Header>
-      <ContentBox className="flex-grow" data-testid="basic-layout__content">
-        <main>{children}</main>
+      <ContentBox className="flex-grow">
+        <main data-testid="basic-layout__content">{children}</main>
       </ContentBox>
     </PageWrapper>
   );

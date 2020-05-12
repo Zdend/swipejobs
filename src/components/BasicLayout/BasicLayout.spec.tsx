@@ -14,7 +14,6 @@ describe('BasicLayout', () => {
 
   it('renders title', () => {
     expect(getByTestId('basic-layout__header').textContent).toContain('Hello title');
-    expect(getByTestId('basic-layout__header').textContent).toContain('DEMO Streaming');
   });
 
   it('renders content', () => {

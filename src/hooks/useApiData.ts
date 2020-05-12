@@ -15,15 +15,17 @@ export const useApiData = <F extends (...args: any[]) => Promise<any>>(
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let response = null;
+    let currentError = null;
     (async () => {
       setLoading(true);
       try {
-        const response = await fetchApi(...fetchArgs);
-        setData(response);
-        setError(null);
+        response = await fetchApi(...fetchArgs);
       } catch (err) {
-        setError(err);
+        currentError = err;
       }
+      setData(response);
+      setError(currentError);
       setLoading(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

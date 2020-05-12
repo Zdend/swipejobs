@@ -4,8 +4,11 @@ const formatDate = (date: Date, options: Intl.DateTimeFormatOptions) => {
   return new Intl.DateTimeFormat(DATE_LOCALE, options).format(date);
 };
 
-export const displayDate = (isoDate: string): string => {
+export const displayDateAndTime = (isoDate: string): string => {
   const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) {
+    return '';
+  }
   return formatDate(date, {
     month: 'short',
     day: 'numeric',
@@ -17,6 +20,9 @@ export const displayDate = (isoDate: string): string => {
 
 export const displayTime = (isoDate: string): string => {
   const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) {
+    return '';
+  }
   return formatDate(date, {
     timeZoneName: 'short',
     hour: 'numeric',

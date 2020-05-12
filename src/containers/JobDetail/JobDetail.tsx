@@ -25,7 +25,7 @@ import Btn from '@/components/Btn';
 import { BtnColorType, NotificationColorType } from '@/shared/theme';
 import { fetchRejectJob, fetchAcceptJob } from '@/api/job';
 import { useApiCallback } from '@/hooks/useApiCallback';
-import { displayDate, displayTime } from '@/shared/date';
+import { displayDateAndTime, displayTime } from '@/shared/date';
 import Notification from '@/components/Notification';
 
 interface JobDetailProps {
@@ -63,7 +63,7 @@ const JobDetail = ({ workerId, job, nextJob }: JobDetailProps) => {
   const error =
     rejectError || acceptError || rejectData?.success === false || acceptData?.success === false;
   return (
-    <JobDetailWrapper>
+    <JobDetailWrapper data-testid="job-detail">
       <JobDetailBanner
         src={jobImageLoaded ? jobImageUrl : '/images/logo.png'}
         contain={!jobImageLoaded}
@@ -91,7 +91,7 @@ const JobDetail = ({ workerId, job, nextJob }: JobDetailProps) => {
           {job.shifts.length ? (
             job.shifts.map(shift => (
               <div key={shift.startDate + shift.endDate} className="uppercase mt-1">
-                {displayDate(shift.startDate)} - {displayTime(shift.endDate)}
+                {displayDateAndTime(shift.startDate)} - {displayTime(shift.endDate)}
               </div>
             ))
           ) : (
@@ -131,11 +131,21 @@ const JobDetail = ({ workerId, job, nextJob }: JobDetailProps) => {
         </JobDetailInfoPanel>
       </JobDetailInfoPanels>
       <JobDetailActions>
-        <Btn color={BtnColorType.SECONDARY} disabled={loading} onClick={onRejectJob}>
+        <Btn
+          color={BtnColorType.SECONDARY}
+          disabled={loading}
+          onClick={onRejectJob}
+          data-testid="job-detail__reject"
+        >
           {rejectLoading && <RiLoader4Line className="spin mr-2" />}
           No Thanks
         </Btn>
-        <Btn color={BtnColorType.PRIMARY} disabled={loading} onClick={onAcceptJob}>
+        <Btn
+          color={BtnColorType.PRIMARY}
+          disabled={loading}
+          onClick={onAcceptJob}
+          data-testid="job-detail__accept"
+        >
           {acceptLoading && <RiLoader4Line className="spin mr-2" />}
           I&apos;ll Take it
         </Btn>
