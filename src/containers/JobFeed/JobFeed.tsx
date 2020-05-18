@@ -14,17 +14,15 @@ const JobFeed = ({ workerId }: JobFeedProps) => {
   const [jobIndex, setJobIndex] = useState(0);
   const result = useApiData(fetchJobMatches, workerId);
   const nextJob = useCallback(() => setJobIndex(i => i + 1), []);
-
   if (shouldRenderDataState(result)) {
     return <DataState {...result} />;
   }
 
   const { data } = result;
   const currentJob = data[jobIndex];
-
   if (!currentJob) {
     return (
-      <PageStatus IconComponent={RiCheckDoubleLine}>
+      <PageStatus IconComponent={RiCheckDoubleLine} data-testid="job-feed__all-seen">
         You have seen all positions, please come back later.
       </PageStatus>
     );

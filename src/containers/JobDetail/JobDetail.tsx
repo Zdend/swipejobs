@@ -62,6 +62,7 @@ const JobDetail = ({ workerId, job, nextJob }: JobDetailProps) => {
   const loading = rejectLoading || acceptLoading;
   const error =
     rejectError || acceptError || rejectData?.success === false || acceptData?.success === false;
+
   return (
     <JobDetailWrapper data-testid="job-detail">
       <JobDetailBanner
